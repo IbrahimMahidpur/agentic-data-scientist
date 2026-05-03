@@ -1,0 +1,65 @@
+[project]
+name = "agentic-data-scientist"
+version = "0.2.2"
+description = "Agentic Data Scientist — configured for local Ollama models (no API keys needed)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = {text = "MIT"}
+authors = [
+    {name = "K-Dense", email="contact@k-dense.ai"}
+]
+keywords = ["ai", "agents", "adk", "ollama", "multi-agent", "llm", "data-science", "local"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "google-adk==1.18.0",
+    "google-genai>=1.26.0",
+    # claude-agent-sdk removed — not needed for Ollama mode
+    "click>=8.1.0",
+    "aiofiles>=24.1.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.0",
+    "jinja2>=3.1.0",
+    "mcp>=1.0.0",
+    "litellm>=1.40.0",   # required for Ollama/LiteLLM integration
+    "requests>=2.32.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/K-Dense-AI/agentic-data-scientist"
+Repository = "https://github.com/K-Dense-AI/agentic-data-scientist"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "ruff>=0.13.1",
+]
+
+[project.scripts]
+agentic-data-scientist = "agentic_data_scientist.cli.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+exclude = [".git", ".venv", ".mypy_cache", ".ruff_cache", "__pycache__", "build", "dist"]
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+[tool.ruff.lint]
+extend-select = ["I"]
+ignore = ["E501", "W505", "COM812", "ISC001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
